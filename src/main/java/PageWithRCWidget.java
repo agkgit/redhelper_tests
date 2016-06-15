@@ -1,12 +1,17 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.testng.Assert.fail;
 
 public class PageWithRCWidget {
 
-	public WebDriver driver;
+	WebDriver driver;
 
 	//элементы виджета на тестируемой странице
 	By rc_phone = By.id("rc-phone");
@@ -17,22 +22,33 @@ public class PageWithRCWidget {
 
 	//конструкторы
 	PageWithRCWidget(){
-		FirefoxProfile firefoxProfile = new FirefoxProfile();
-		firefoxProfile.setPreference("browser.private.browsing.autostart", true);
-		this.driver = new FirefoxDriver(firefoxProfile);
+//		FirefoxProfile firefoxProfile = new FirefoxProfile();
+//		firefoxProfile.setPreference("browser.private.browsing.autostart", true);
+		this.driver = new FirefoxDriver();
 	};
 
 	PageWithRCWidget(WebDriver driver){
 		this.driver = driver;
 	}
 
+	//открытие тестируемого сайта с виджетом RC
+	public void openSite(String url) {
+		this.driver.get(url);
+	}
+
 	//открытие виджета
 	public void clickWidgetButton() {
+		try {
+			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+					.until(ExpectedConditions.presenceOfElementLocated(rc_phone));
+			} catch (TimeoutException e) {
+				fail("Виджет недоступен");
+			}
 		driver.findElement(rc_phone).click();
 	}
 
 	//обновление страницы
-	public void refresh() {
+	public void reload() {
 		driver.navigate().refresh();
 	}
 
