@@ -1,4 +1,3 @@
-import org.aspectj.lang.annotation.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,15 +17,11 @@ public class TestRCInvalidNumbers {
 	@Test
 	public void setUnvalidNumber() throws InterruptedException {
 
-//		PageWithRCWidget pageWithRCWidget = new PageWithRCWidget();
-//		pageWithRCWidget.openSite("http://vernee.ru/qa");
-//		pageWithRCWidget.clickWidgetButton();
-//		pageWithRCWidget.inputNumber("79999864875");
-//		pageWithRCWidget.clickThePhoneButton();
-
-		WebDriver driver = new FirefoxDriver();
-        driver.get("http://www.vernee.ru/qa");
-        driver.findElement(By.id("rc-phone")).click();
+		PageWithRCWidget pageWithRCWidget = new PageWithRCWidget();
+		pageWithRCWidget.openSite("http://vernee.ru/qa");
+		pageWithRCWidget.clickWidgetButton();
+		pageWithRCWidget.inputNumber("79999864875");
+		pageWithRCWidget.clickThePhoneButton();
 	}
 }
 

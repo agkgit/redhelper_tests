@@ -22,11 +22,10 @@ public class PageWithRCWidget {
 
 	//конструкторы
 	PageWithRCWidget(){
-//		FirefoxProfile firefoxProfile = new FirefoxProfile();
-//		firefoxProfile.setPreference("browser.private.browsing.autostart", true);
+		FirefoxProfile firefoxProfile = new FirefoxProfile();
+		firefoxProfile.setPreference("browser.private.browsing.autostart", true);
 		this.driver = new FirefoxDriver();
 	};
-
 	PageWithRCWidget(WebDriver driver){
 		this.driver = driver;
 	}
@@ -65,5 +64,7 @@ public class PageWithRCWidget {
 	public void clickThePhoneButton() {
 		driver.findElement(rc_phone_button).click();
 	}
+
+
 
 }
