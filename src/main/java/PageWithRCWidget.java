@@ -38,7 +38,7 @@ public class PageWithRCWidget {
 	//открытие виджета
 	public void clickWidgetButton() {
 		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+			WebElement byWidgetButton = (new WebDriverWait(driver, 5))
 					.until(ExpectedConditions.presenceOfElementLocated(rc_phone));
 			} catch (TimeoutException e) {
 				fail("Виджет недоступен");
@@ -49,6 +49,10 @@ public class PageWithRCWidget {
 	//обновление страницы
 	public void reload() {
 		driver.navigate().refresh();
+	}
+
+	public void close() {
+		driver.close();
 	}
 
 	//ввод номера
@@ -63,6 +67,16 @@ public class PageWithRCWidget {
 	//нажатие кнопки "Позвонить"
 	public void clickThePhoneButton() {
 		driver.findElement(rc_phone_button).click();
+	}
+
+	//проверка появления предупреждения при вводе невалидного номера
+	public void waitWarningInvalidNumber(){
+		try {
+			WebElement warningElement = (new WebDriverWait(driver, 1))
+						.until(ExpectedConditions.presenceOfElementLocated(By.id("rc-phone-input-warning")));
+		} catch (TimeoutException e) {
+				fail("Не появилось предупреждение при вводе невалидного номера");
+		}
 	}
 
 
