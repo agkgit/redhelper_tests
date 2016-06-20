@@ -1,4 +1,5 @@
+import org.openqa.selenium.WebDriver;
 
-public class My {
+public class My extends TestPage {
 
 }

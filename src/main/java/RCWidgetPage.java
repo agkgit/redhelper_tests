@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,9 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.testng.Assert.fail;
 
-public class PageWithRCWidget {
-
-	WebDriver driver;
+public class RCWidgetPage extends TestPage {
 
 	//элементы виджета на тестируемой странице
 	By rc_phone = By.id("rc-phone");
@@ -20,45 +19,36 @@ public class PageWithRCWidget {
 	By rc_phone_button = By.id("rc-phone-button");
 	By rc_phone_input_warning = By.id("rc-phone-input-warning");
 
-	//конструкторы
-	PageWithRCWidget(){
-		FirefoxProfile firefoxProfile = new FirefoxProfile();
-		firefoxProfile.setPreference("browser.private.browsing.autostart", true);
-		this.driver = new FirefoxDriver();
-	};
-	PageWithRCWidget(WebDriver driver){
-		this.driver = driver;
-	}
-
-	//открытие тестируемого сайта с виджетом RC
-	public void openSite(String url) {
-		this.driver.get(url);
-	}
-
 	//открытие виджета
 	public void clickWidgetButton() {
 		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 5))
+			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
 					.until(ExpectedConditions.presenceOfElementLocated(rc_phone));
-			} catch (TimeoutException e) {
-				fail("Виджет недоступен");
-			}
+		} catch (TimeoutException e) {
+			fail("Виджет недоступен");
+		}
 		driver.findElement(rc_phone).click();
-	}
-
-	//обновление страницы
-	public void reload() {
-		driver.navigate().refresh();
-	}
-
-	public void close() {
-		driver.close();
 	}
 
 	//ввод номера
 	public void inputNumber(String number) {
+		try {
+			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+					.until(ExpectedConditions.presenceOfElementLocated(rc_connector_frame));
+		} catch (TimeoutException e) {
+			fail("rc_connector_frame недоступен");
+		}
+
 		driver.switchTo().frame(driver.findElement(rc_connector_frame));
+
+		try {
+			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+					.until(ExpectedConditions.presenceOfElementLocated(rc_phone_input));
+		} catch (TimeoutException e) {
+			fail("rc_phone_input недоступен");
+		}
 		WebElement rcPhoneInput = driver.findElement(rc_phone_input);
+
 		rcPhoneInput.clear();
 		rcPhoneInput.sendKeys(number);
 		driver.switchTo().defaultContent();
@@ -66,19 +56,24 @@ public class PageWithRCWidget {
 
 	//нажатие кнопки "Позвонить"
 	public void clickThePhoneButton() {
+
+		try {
+			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+				.until(ExpectedConditions.presenceOfElementLocated(rc_phone_button));
+	} catch (TimeoutException e) {
+		fail("rc_connector_frame недоступен");
+	}
+
 		driver.findElement(rc_phone_button).click();
 	}
 
-	//проверка появления предупреждения при вводе невалидного номера
-	public void waitWarningInvalidNumber(){
+	//ожидание появления предупреждения
+	public void waitWarningInvalidNumber() {
 		try {
-			WebElement warningElement = (new WebDriverWait(driver, 1))
-						.until(ExpectedConditions.presenceOfElementLocated(By.id("rc-phone-input-warning")));
+			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+					.until(ExpectedConditions.presenceOfElementLocated(rc_phone_input_warning));
 		} catch (TimeoutException e) {
-				fail("Не появилось предупреждение при вводе невалидного номера");
+			fail("не появилось предупреждение 'Внимание! Проверьте правильность набранного номера'");
 		}
 	}
-
-
-
 }
