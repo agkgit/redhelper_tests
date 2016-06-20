@@ -1,7 +1,9 @@
+import com.redhelper.RCEnvironment;
 import com.redhelper.RCOperator;
 import com.redhelper.TestSettings;
 import com.sun.deploy.Environment;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static org.testng.Assert.fail;
+
 
 public class My extends TestPage {
 
@@ -35,11 +38,13 @@ public class My extends TestPage {
 				"											/div/div[2]/div[5]/button");
 		public static final By BY_REDCONNECT_MENU = By.xpath("//*[@id=\"a-redconnect\"]");
 
-		Environment environment;
+		RCEnvironment rcEnvironment;
 		String login, password;
 		String urlMy;
 
-		public FirefoxDriver openMy() {
+
+
+		public WebDriver openMy() {
 			driver.get(urlMy);
 			driver.findElement(By.id("name")).sendKeys(login);
 			driver.findElement(By.id("password")).sendKeys(password);
@@ -89,12 +94,8 @@ public class My extends TestPage {
 
 			driver.findElement(BY_ADD_NUMBER).click();
 
-			try {
-				WebElement numberInputElement = (new WebDriverWait(driver, 4)).until(ExpectedConditions.presenceOfElementLocated(BY_NUMBER_IMPUT));
-				numberInputElement.sendKeys(operator.number);
-			} catch (TimeoutException e) {
-				fail("Не появился элемент");
-			}
+			WebElement numberInputElement = driver.findElement(BY_NUMBER_IMPUT);
+			numberInputElement.sendKeys(operator.number);
 
 			driver.findElement(BY_ADD_WORK_TIME).click();
 
@@ -109,7 +110,7 @@ public class My extends TestPage {
 			driver.findElement(BY_SAVE_SETTINGS).click();
 		}
 
-	public void setOperators (List<RCOperator> operatorsList) {
+		public void setOperators (List<RCOperator> operatorsList) {
 
 		Integer i = 2;
 
@@ -147,13 +148,13 @@ public class My extends TestPage {
 		}
 	}
 
-		public My(Environment environment) {
+		public My(RCEnvironment environment) {
 
 			driver = new FirefoxDriver();
 
-			this.environment = environment;
+			this.rcEnvironment = environment;
 
-			if (environment == Environment.TEST) {
+			if (environment == RCEnvironment.TEST) {
 				this.urlMy = TestSettings.urlTestMy;
 				this.login = TestSettings.rcLoginTest;
 				this.password = TestSettings.rcPassTest;
