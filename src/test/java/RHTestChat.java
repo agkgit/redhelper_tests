@@ -60,7 +60,7 @@
 //			WebElement rhTextArea = driver.findElement(By.id("chatTextarea"));
 //			WebElement rhSendButton = driver.findElement(By.id("chatSend"));
 //
-//			for (String message : TestSettings.messages) {
+//			for (String message : com.redhelper.TestSettings.messages) {
 //				rhTextArea.sendKeys(message);
 //				rhSendButton.click();
 //

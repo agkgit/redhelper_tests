@@ -41,7 +41,7 @@
 ////        WebElement button = driver.findElement(By.id("rc-phone-button"));
 ////        int i = 1;
 //
-//        for (String number : TestSettings.numbers) {
+//        for (String number : com.redhelper.TestSettings.numbers) {
 //
 //            driver.navigate().refresh();
 //            WebElement rcFrameNumber = driver.findElement(By.className("rc-connector-frame"));
@@ -72,7 +72,7 @@
 ////        WebElement rhTextArea = driver.findElement(By.id("chatTextarea"));
 ////        WebElement rhSendButton = driver.findElement(By.id("chatSend"));
 ////
-////        for (String message : TestSettings.messages) {
+////        for (String message : com.redhelper.TestSettings.messages) {
 ////            rhTextArea.sendKeys(message);
 ////            rhSendButton.click();
 ////

@@ -1,5 +1,5 @@
+import com.redhelper.TestSettings;
 import org.testng.annotations.*;
-
 import static org.testng.AssertJUnit.fail;
 
 
@@ -7,17 +7,17 @@ public class TestRCInvalidNumbers {
 
 	@Test
 	public void setUnvalidNumber() throws InterruptedException {
-		RCWidgetPage RCWidgetPage = new RCWidgetPage();
-		RCWidgetPage.openSite("http://vernee.ru/qa");
+		RCWidgetPage rcWidgetPage = new RCWidgetPage();
+		rcWidgetPage.openSite("http://vernee.ru/qa");
 
 		for (String number : TestSettings.numbers) {
-			RCWidgetPage.reload();
-			RCWidgetPage.clickWidgetButton();
-			RCWidgetPage.inputNumber(number);
-			RCWidgetPage.clickThePhoneButton();
-			RCWidgetPage.waitWarningInvalidNumber();
+			rcWidgetPage.reload();
+			rcWidgetPage.clickWidgetButton();
+			rcWidgetPage.inputNumber(number);
+			rcWidgetPage.clickThePhoneButton();
+			rcWidgetPage.waitWarningInvalidNumber();
 		}
 
-		RCWidgetPage.close();
+		rcWidgetPage.close();
 	}
 }
