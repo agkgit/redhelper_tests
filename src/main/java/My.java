@@ -22,38 +22,36 @@ public class My extends TestPage {
 		public static final String MY_URL = "http://test.redhelper.ru/my/redconnect";
 
 		// константы типа By
-		public static final By BY_DELETE_PHONE = By.xpath(".//a[@ng-click-outside='cancelDeletePhone(phone)']");
-		public static final By BY_DO_DELETE_PHONE_YES = By.xpath(".//button[@ng-click='doDeletePhone(phone)']");
-		public static final By BY_ADD_NUMBER = By.cssSelector("div.rc-new-item:nth-child(3) > span:nth-child(2)");
-		public static final By BY_NUMBER_IMPUT = By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]" +
-									"/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[1]/div[1]/div[1]/div/input[1]");
-		public static final By BY_ADD_WORK_TIME = By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div" +
-															"/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[2]/a[1]");
-		public static final By BY_START_WORK_TIME = By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]" +
-				"									/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[1]");
-		public static final By BY_STOP_WORK_TIME = By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/" +
-				"										div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[2]");
-		public static final By BY_SAVE_SETTINGS = By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div" +
-				"											/div/div[2]/div[5]/button");
-		public static final By BY_REDCONNECT_MENU = By.xpath("//*[@id=\"a-redconnect\"]");
+		public static final By BY_DELETE_PHONE			= By.xpath(".//a[@ng-click-outside='cancelDeletePhone(phone)']");
+		public static final By BY_DO_DELETE_PHONE_YES	= By.xpath(".//button[@ng-click='doDeletePhone(phone)']");
+		public static final By BY_ADD_NUMBER			= By.cssSelector("div.rc-new-item:nth-child(3) > span:nth-child(2)");
+		public static final By BY_NUMBER_IMPUT			= By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[1]/div[1]/div[1]/div/input[1]");
+		public static final By BY_ADD_WORK_TIME			= By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[2]/a[1]");
+		public static final By BY_START_WORK_TIME		= By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[1]");
+		public static final By BY_STOP_WORK_TIME		= By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[2]");
+		public static final By BY_SAVE_SETTINGS			= By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[5]/button");
+		public static final By BY_REDCONNECT_MENU		= By.xpath("//*[@id=\"a-redconnect\"]");
 
 		RCEnvironment rcEnvironment;
 		String login, password;
 		String urlMy;
 
-
-
 		public WebDriver openMy() {
-			driver.get(urlMy);
+			super.openSite(urlMy);
+
 			driver.findElement(By.id("name")).sendKeys(login);
 			driver.findElement(By.id("password")).sendKeys(password);
 			driver.findElement(By.className("login-button")).click();
+
+			driver.findElement(BY_REDCONNECT_MENU).click();
+
 			//ожидание для тестовой среды
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+
 			return driver;
 		}
 
@@ -149,7 +147,7 @@ public class My extends TestPage {
 
 		public My(RCEnvironment environment) {
 
-			driver = new FirefoxDriver();
+			super();
 
 			this.rcEnvironment = environment;
 

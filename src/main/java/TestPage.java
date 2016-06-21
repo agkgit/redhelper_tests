@@ -4,6 +4,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.opera.OperaDriver;
+import org.testng.annotations.Test;
 
 public class TestPage {
 
@@ -17,11 +18,9 @@ public class TestPage {
 		firefoxProfile.setPreference("browser.private.browsing.autostart", true);
 		this.driver = new FirefoxDriver();
 	};
-
 	TestPage(WebDriver driver){
 		this.driver = driver;
 	}
-
 	TestPage(BrowsersEnum browser){
 		switch (browser) {
 			case GOOGLE_CHROME:		this.driver = new ChromeDriver(); break;

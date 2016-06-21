@@ -5,13 +5,12 @@ import org.omg.CORBA.Environment;
 import org.testng.annotations.*;
 import static org.testng.AssertJUnit.fail;
 
-
 public class TestRCInvalidNumbers {
 
 	@Test
 	public void setUnvalidNumber() throws InterruptedException {
 		RCWidgetPage rcWidgetPage = new RCWidgetPage();
-		rcWidgetPage.openSite("http://vernee.ru/qa");
+		rcWidgetPage.openSite("http://www.vernee.ru/qa");
 
 		for (String number : TestSettings.numbers) {
 			rcWidgetPage.reload();
@@ -25,16 +24,19 @@ public class TestRCInvalidNumbers {
 
 	@Test
 	public void mainTest() throws InterruptedException {
-		RCWidgetPage rcWidgetPage = new RCWidgetPage();
-		My cabinet = new My(RCEnvironment.TEST);
+		My cabinet = new My(RCEnvironment.PRODUCTION);
+		cabinet.openMy();
 		cabinet.setBusinessTariff();
 		cabinet.deleteOperators();
-		cabinet.setOperator(new RCOperator("79999864875"));
+		cabinet.setOperator(new RCOperator("9999864875"));
 		cabinet.close();
+
+		RCWidgetPage rcWidgetPage = new RCWidgetPage();
 		rcWidgetPage.openSite("http://vernee.ru/qa");
 		rcWidgetPage.inputNumber("79999864875");
 		rcWidgetPage.clickThePhoneButton();
 		Thread.sleep(50000);
 		rcWidgetPage.close();
 	}
+
 }
