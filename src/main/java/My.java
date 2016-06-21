@@ -22,7 +22,6 @@ public class My extends TestPage {
 		public static final String MY_URL = "http://test.redhelper.ru/my/redconnect";
 
 		// константы типа By
-
 		public static final By BY_DELETE_PHONE = By.xpath(".//a[@ng-click-outside='cancelDeletePhone(phone)']");
 		public static final By BY_DO_DELETE_PHONE_YES = By.xpath(".//button[@ng-click='doDeletePhone(phone)']");
 		public static final By BY_ADD_NUMBER = By.cssSelector("div.rc-new-item:nth-child(3) > span:nth-child(2)");
