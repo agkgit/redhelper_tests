@@ -31,12 +31,14 @@ public class My extends TestPage {
 		public static final By BY_STOP_WORK_TIME		= By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[2]");
 		public static final By BY_SAVE_SETTINGS			= By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[5]/button");
 		public static final By BY_REDCONNECT_MENU		= By.xpath("//*[@id=\"a-redconnect\"]");
+		public static final By BY_BUSINESS_TARIFF		= By.xpath(".//div[@class='rc-mode-name' and contains(.,'Business')]");
+		public static final By BY_FREE_TARIFF			= By.xpath(".//div[@class='rc-mode-name' and contains(.,'Business')]");
 
 		RCEnvironment rcEnvironment;
 		String login, password;
 		String urlMy;
 
-		public WebDriver openMy() {
+		public void openMy() {
 			super.openSite(urlMy);
 
 			driver.findElement(By.id("name")).sendKeys(login);
@@ -44,25 +46,13 @@ public class My extends TestPage {
 			driver.findElement(By.className("login-button")).click();
 
 			driver.findElement(BY_REDCONNECT_MENU).click();
-
-			//ожидание для тестовой среды
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-
-			return driver;
 		}
 
 		public void setFreeTariff() {
-			String xpathFree = ".//div[@class='rc-mode-name' and contains(.,'Free')]";
-			driver.findElement(By.xpath(xpathFree)).click();
+			driver.findElement(BY_FREE_TARIFF).click();
 		}
-
 		public void setBusinessTariff() {
-			String xpathBusiness = ".//div[@class='rc-mode-name' and contains(.,'Business')]";
-			driver.findElement(By.xpath(xpathBusiness)).click();
+			driver.findElement(BY_BUSINESS_TARIFF).click();
 		}
 
 		public void deleteOperators() {
@@ -86,7 +76,6 @@ public class My extends TestPage {
 				}
 			}
 		}
-
 		public void setOperator( RCOperator operator ) {
 
 			driver.findElement(BY_ADD_NUMBER).click();
@@ -106,12 +95,11 @@ public class My extends TestPage {
 
 			driver.findElement(BY_SAVE_SETTINGS).click();
 		}
-
-		public void setOperators (List<RCOperator> operatorsList) {
+		public void setOperators (RCOperator...operators) {
 
 		Integer i = 2;
 
-		for (RCOperator operator : operatorsList) {
+		for (RCOperator operator : operators) {
 
 			driver.findElement(BY_ADD_NUMBER);
 			String numberXpathString = "/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul["+ i +"]/li[1]/div[2]/div[1]/div[1]/div[1]/div/input";
@@ -145,13 +133,11 @@ public class My extends TestPage {
 		}
 	}
 
-		public My(RCEnvironment environment) {
+		public My(RCEnvironment rcEnvironment) {
 
-			super();
+			this.rcEnvironment = rcEnvironment;
 
-			this.rcEnvironment = environment;
-
-			if (environment == RCEnvironment.TEST) {
+			if (rcEnvironment == RCEnvironment.TEST) {
 				this.urlMy = TestSettings.urlTestMy;
 				this.login = TestSettings.rcLoginTest;
 				this.password = TestSettings.rcPassTest;
@@ -164,4 +150,5 @@ public class My extends TestPage {
 			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 			driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
 		}
+
 	}

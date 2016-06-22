@@ -1,7 +1,6 @@
 import com.redhelper.RCEnvironment;
 import com.redhelper.RCOperator;
 import com.redhelper.TestSettings;
-import org.omg.CORBA.Environment;
 import org.testng.annotations.*;
 import static org.testng.AssertJUnit.fail;
 
@@ -24,6 +23,7 @@ public class TestRCInvalidNumbers {
 
 	@Test
 	public void mainTest() throws InterruptedException {
+
 		My cabinet = new My(RCEnvironment.PRODUCTION);
 		cabinet.openMy();
 		cabinet.setBusinessTariff();
@@ -33,9 +33,11 @@ public class TestRCInvalidNumbers {
 
 		RCWidgetPage rcWidgetPage = new RCWidgetPage();
 		rcWidgetPage.openSite("http://vernee.ru/qa");
+		rcWidgetPage.clickWidgetButton();
 		rcWidgetPage.inputNumber("79999864875");
 		rcWidgetPage.clickThePhoneButton();
-		Thread.sleep(50000);
+		rcWidgetPage.waitPhoneDialElements();
+		//Thread.sleep(50000);
 		rcWidgetPage.close();
 	}
 

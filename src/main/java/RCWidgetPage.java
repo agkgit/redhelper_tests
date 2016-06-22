@@ -1,13 +1,8 @@
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import static org.testng.Assert.fail;
 
 public class RCWidgetPage extends TestPage {
@@ -38,7 +33,6 @@ public class RCWidgetPage extends TestPage {
 		} catch (TimeoutException e) {
 			fail("rc_connector_frame недоступен");
 		}
-
 		driver.switchTo().frame(driver.findElement(rc_connector_frame));
 
 		try {
@@ -76,4 +70,21 @@ public class RCWidgetPage extends TestPage {
 			fail("не появилось предупреждение 'Внимание! Проверьте правильность набранного номера'");
 		}
 	}
+
+	public void waitPhoneDialElements() {
+		By by_phone_dial = By.id("rc-phone-dial");
+		By by_rc_phone_dial_snake = By.id("rc-phone-dial-snake");
+		By by_rc_phone_dial_snake_curtain = By.id("rc-phone-dial-snake-curtain");
+		By by_rc_phone_dial_snake_curtain2 = By.id("rc-phone-dial-snake-curtain2");
+		By by_rc_phone_dial_half_circle = By.id("rc-phone-dial-half-circle");
+		By by_rc_phone_dial_circle = By.id("rc-phone-dial-circle");
+
+		this.wait(by_phone_dial);
+		this.wait(by_rc_phone_dial_snake);
+		this.wait(by_rc_phone_dial_snake_curtain);
+		this.wait(by_rc_phone_dial_snake_curtain2);
+		this.wait(by_rc_phone_dial_half_circle);
+		this.wait(by_rc_phone_dial_circle);
+	}
+
 }

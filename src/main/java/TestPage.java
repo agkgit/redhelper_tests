@@ -1,10 +1,17 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.fail;
 
 public class TestPage {
 
@@ -24,19 +31,20 @@ public class TestPage {
 	TestPage(BrowsersEnum browser){
 		switch (browser) {
 			case GOOGLE_CHROME:		this.driver = new ChromeDriver(); break;
-			case MOZILLA_FIREFOX:
-				break;
 			case OPERA:				this.driver = new OperaDriver(); break;
 			case MS_EDGE:			this.driver = new EdgeDriver(); break;
-			case APPLE_SAFARI:
-				break;
-			case PHANTOMJS:
-				break;
+			case APPLE_SAFARI:		break;
+			case PHANTOMJS:			break;
+			case MOZILLA_FIREFOX:	break;
 			default:
 				FirefoxProfile firefoxProfile = new FirefoxProfile();
 				firefoxProfile.setPreference("browser.private.browsing.autostart", true);
 				this.driver = new FirefoxDriver();
 		}
+	}
+
+	public WebDriver getDriver() {
+		return this.driver;
 	}
 
 	//открытие тестируемого сайта с виджетом RC
@@ -52,5 +60,14 @@ public class TestPage {
 	//закрытие страницы
 	public void close() {
 		driver.close();
+	}
+
+	public void wait(By byElement) {
+		try {
+			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+					.until(ExpectedConditions.presenceOfElementLocated(byElement));
+		} catch (TimeoutException e) {
+			fail("элемент недоступен");
+		}
 	}
 }
