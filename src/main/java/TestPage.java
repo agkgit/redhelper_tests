@@ -62,6 +62,7 @@ public class TestPage {
 		driver.close();
 	}
 
+	//ожидание элемента
 	public void wait(By byElement) {
 		try {
 			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
@@ -70,4 +71,14 @@ public class TestPage {
 			fail("элемент недоступен");
 		}
 	}
+
+	public void waitWithFailText(By byElement, String failText) {
+		try {
+			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
+					.until(ExpectedConditions.presenceOfElementLocated(byElement));
+		} catch (TimeoutException e) {
+			fail(failText);
+		}
+	}
+
 }

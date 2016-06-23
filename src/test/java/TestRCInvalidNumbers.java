@@ -41,4 +41,11 @@ public class TestRCInvalidNumbers {
 		rcWidgetPage.close();
 	}
 
+	@Test
+	public void testik() throws InterruptedException {
+		RCWidgetPage rcWidgetPage = new RCWidgetPage();
+		rcWidgetPage.openSite("http://vernee.ru/qa");
+		rcWidgetPage.waitWarningInvalidNumber();
+	}
+
 }

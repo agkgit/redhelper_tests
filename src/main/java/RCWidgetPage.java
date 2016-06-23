@@ -61,30 +61,22 @@ public class RCWidgetPage extends TestPage {
 		driver.findElement(rc_phone_button).click();
 	}
 
-	//ожидание появления предупреждения
+	//ожидание появления предупреждения 'Внимание! Проверьте правильность набранного номера'
 	public void waitWarningInvalidNumber() {
-		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
-					.until(ExpectedConditions.presenceOfElementLocated(rc_phone_input_warning));
-		} catch (TimeoutException e) {
-			fail("не появилось предупреждение 'Внимание! Проверьте правильность набранного номера'");
-		}
+		String failText = "не появилось предупреждение 'Внимание! Проверьте правильность набранного номера'";
+		this.waitWithFailText(rc_phone_input_warning, failText);
 	}
 
+	//ожидания при состоявшемся звонке
 	public void waitPhoneDialElements() {
-		By by_phone_dial = By.id("rc-phone-dial");
-		By by_rc_phone_dial_snake = By.id("rc-phone-dial-snake");
-		By by_rc_phone_dial_snake_curtain = By.id("rc-phone-dial-snake-curtain");
-		By by_rc_phone_dial_snake_curtain2 = By.id("rc-phone-dial-snake-curtain2");
-		By by_rc_phone_dial_half_circle = By.id("rc-phone-dial-half-circle");
-		By by_rc_phone_dial_circle = By.id("rc-phone-dial-circle");
 
-		this.wait(by_phone_dial);
-		this.wait(by_rc_phone_dial_snake);
-		this.wait(by_rc_phone_dial_snake_curtain);
-		this.wait(by_rc_phone_dial_snake_curtain2);
-		this.wait(by_rc_phone_dial_half_circle);
-		this.wait(by_rc_phone_dial_circle);
+		this.wait(By.id("rc-phone-dial"));
+		this.wait(By.id("rc-phone-dial-snake"));
+		this.wait(By.id("rc-phone-dial-snake-curtain"));
+		this.wait(By.id("rc-phone-dial-snake-curtain2"));
+		this.wait(By.id("rc-phone-dial-half-circle"));
+		this.wait(By.id("rc-phone-dial-circle"));
+
 	}
 
 }
