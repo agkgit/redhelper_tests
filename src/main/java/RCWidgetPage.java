@@ -3,6 +3,9 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Date;
+
 import static org.testng.Assert.fail;
 
 public class RCWidgetPage extends TestPage {
@@ -16,31 +19,16 @@ public class RCWidgetPage extends TestPage {
 
 	//открытие виджета
 	public void clickWidgetButton() {
-		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
-					.until(ExpectedConditions.presenceOfElementLocated(rc_phone));
-		} catch (TimeoutException e) {
-			fail("Виджет недоступен");
-		}
+		this.wait(rc_phone);
 		driver.findElement(rc_phone).click();
 	}
 
 	//ввод номера
 	public void inputNumber(String number) {
-		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
-					.until(ExpectedConditions.presenceOfElementLocated(rc_connector_frame));
-		} catch (TimeoutException e) {
-			fail("rc_connector_frame недоступен");
-		}
+		this.wait(rc_connector_frame);
 		driver.switchTo().frame(driver.findElement(rc_connector_frame));
 
-		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
-					.until(ExpectedConditions.presenceOfElementLocated(rc_phone_input));
-		} catch (TimeoutException e) {
-			fail("rc_phone_input недоступен");
-		}
+		this.wait(rc_phone_input);
 		WebElement rcPhoneInput = driver.findElement(rc_phone_input);
 
 		rcPhoneInput.clear();
@@ -71,12 +59,17 @@ public class RCWidgetPage extends TestPage {
 	public void waitPhoneDialElements() {
 
 		this.wait(By.id("rc-phone-dial"));
+		System.out.println("rc-phone-dial is visible\t" + new Date(System.currentTimeMillis()));					//del
 		this.wait(By.id("rc-phone-dial-snake"));
+		System.out.println("rc-phone-dial-snake is visible\t" + new Date(System.currentTimeMillis()));				//del
 		this.wait(By.id("rc-phone-dial-snake-curtain"));
+		System.out.println("rc-phone-dial-snake-curtain is visible\t" + new Date(System.currentTimeMillis()));		//del
 		this.wait(By.id("rc-phone-dial-snake-curtain2"));
+		System.out.println("rc-phone-dial-snake-curtain2 is visible\t" + new Date(System.currentTimeMillis()));		//del
 		this.wait(By.id("rc-phone-dial-half-circle"));
+		System.out.println("rc-phone-dial-half-circle\t" + new Date(System.currentTimeMillis()));					//del
 		this.wait(By.id("rc-phone-dial-circle"));
-
+		System.out.println("rc-phone-dial-circle\t" + new Date(System.currentTimeMillis()));						//del
 	}
 
 }

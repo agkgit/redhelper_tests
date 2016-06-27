@@ -65,17 +65,14 @@ public class TestPage {
 	//ожидание элемента
 	public void wait(By byElement) {
 		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
-					.until(ExpectedConditions.presenceOfElementLocated(byElement));
+			(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(driver.findElement(byElement)));
 		} catch (TimeoutException e) {
 			fail("элемент недоступен");
 		}
 	}
-
 	public void waitWithFailText(By byElement, String failText) {
 		try {
-			WebElement byWidgetButton = (new WebDriverWait(driver, 1))
-					.until(ExpectedConditions.presenceOfElementLocated(byElement));
+			(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(driver.findElement(byElement)));
 		} catch (TimeoutException e) {
 			fail(failText);
 		}

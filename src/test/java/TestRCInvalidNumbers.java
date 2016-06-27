@@ -24,20 +24,19 @@ public class TestRCInvalidNumbers {
 	@Test
 	public void mainTest() throws InterruptedException {
 
-		My cabinet = new My(RCEnvironment.PRODUCTION);
+		My cabinet = new My(RCEnvironment.TEST);
 		cabinet.openMy();
 		cabinet.setBusinessTariff();
 		cabinet.deleteOperators();
-		cabinet.setOperator(new RCOperator("9999864875"));
+		cabinet.setOperator(new RCOperator("9094065104"));
 		cabinet.close();
 
 		RCWidgetPage rcWidgetPage = new RCWidgetPage();
 		rcWidgetPage.openSite("http://vernee.ru/qa");
 		rcWidgetPage.clickWidgetButton();
-		rcWidgetPage.inputNumber("79999864875");
+		rcWidgetPage.inputNumber("79094065104");
 		rcWidgetPage.clickThePhoneButton();
 		rcWidgetPage.waitPhoneDialElements();
-		//Thread.sleep(50000);
 		rcWidgetPage.close();
 	}
 
