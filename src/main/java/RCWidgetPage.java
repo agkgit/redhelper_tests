@@ -3,6 +3,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.Date;
 
@@ -17,13 +18,13 @@ public class RCWidgetPage extends TestPage {
 	By rc_phone_button = By.id("rc-phone-button");
 	By rc_phone_input_warning = By.id("rc-phone-input-warning");
 
-	//открытие виджета
+	@Step("открытие виджета")
 	public void clickWidgetButton() {
 		this.wait(rc_phone);
 		driver.findElement(rc_phone).click();
 	}
 
-	//ввод номера
+	@Step("ввод номера")
 	public void inputNumber(String number) {
 		this.wait(rc_connector_frame);
 		driver.switchTo().frame(driver.findElement(rc_connector_frame));
@@ -36,7 +37,7 @@ public class RCWidgetPage extends TestPage {
 		driver.switchTo().defaultContent();
 	}
 
-	//нажатие кнопки "Позвонить"
+	@Step("нажатие кнопки \"Позвонить\"")
 	public void clickThePhoneButton() {
 
 		try {
@@ -49,27 +50,21 @@ public class RCWidgetPage extends TestPage {
 		driver.findElement(rc_phone_button).click();
 	}
 
-	//ожидание появления предупреждения 'Внимание! Проверьте правильность набранного номера'
+	@Step("ожидание появления предупреждения 'Внимание! Проверьте правильность набранного номера'")
 	public void waitWarningInvalidNumber() {
 		String failText = "не появилось предупреждение 'Внимание! Проверьте правильность набранного номера'";
-		this.waitWithFailText(rc_phone_input_warning, failText);
+		this.wait(rc_phone_input_warning, failText);
 	}
 
-	//ожидания при состоявшемся звонке
+	@Step("ожидания при состоявшемся звонке")
 	public void waitPhoneDialElements() {
 
-		this.wait(By.id("rc-phone-dial"));
-		System.out.println("rc-phone-dial is visible\t" + new Date(System.currentTimeMillis()));					//del
-		this.wait(By.id("rc-phone-dial-snake"));
-		System.out.println("rc-phone-dial-snake is visible\t" + new Date(System.currentTimeMillis()));				//del
-		this.wait(By.id("rc-phone-dial-snake-curtain"));
-		System.out.println("rc-phone-dial-snake-curtain is visible\t" + new Date(System.currentTimeMillis()));		//del
-		this.wait(By.id("rc-phone-dial-snake-curtain2"));
-		System.out.println("rc-phone-dial-snake-curtain2 is visible\t" + new Date(System.currentTimeMillis()));		//del
-		this.wait(By.id("rc-phone-dial-half-circle"));
-		System.out.println("rc-phone-dial-half-circle\t" + new Date(System.currentTimeMillis()));					//del
-		this.wait(By.id("rc-phone-dial-circle"));
-		System.out.println("rc-phone-dial-circle\t" + new Date(System.currentTimeMillis()));						//del
+		this.wait(By.id("rc-phone-dial"), 3);
+		this.wait(By.id("rc-phone-dial-snake"), 3);
+		this.wait(By.id("rc-phone-dial-snake-curtain"), 3);
+		this.wait(By.id("rc-phone-dial-snake-curtain2"),3);
+		this.wait(By.id("rc-phone-dial-half-circle"), 3);
+		this.wait(By.id("rc-phone-dial-circle"), 3);
 	}
 
 }
