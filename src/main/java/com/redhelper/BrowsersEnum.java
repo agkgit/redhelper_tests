@@ -1,3 +1,0 @@
-package com.redhelper;
-
-enum BrowsersEnum { GOOGLE_CHROME, MOZILLA_FIREFOX, OPERA, MS_EDGE, APPLE_SAFARI, PHANTOMJS }

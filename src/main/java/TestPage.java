@@ -23,18 +23,20 @@ public class TestPage {
 	WebDriver driver;
 
 	//конструкторы
-	TestPage(){
+	public TestPage(){
 		FirefoxProfile firefoxProfile = new FirefoxProfile();
 		firefoxProfile.setPreference("browser.private.browsing.autostart", true);
 		this.driver = new FirefoxDriver();
 
-		this.manage();
+//		this.driver = new PhantomJSDriver(new DesiredCapabilities());
+//		driver.manage().deleteAllCookies();
+//		this.manage();
 
 	};
-	TestPage(WebDriver driver){
+	public TestPage(WebDriver driver){
 		this.driver = driver;
 	}
-	TestPage(BrowsersEnum browser){
+	public TestPage(BrowsersEnum browser){
 		switch (browser) {
 			case GOOGLE_CHROME:		this.driver = new ChromeDriver();									break;
 			case OPERA:				this.driver = new OperaDriver();									break;

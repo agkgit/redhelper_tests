@@ -41,7 +41,7 @@ public class My extends TestPage {
 	String urlMy;
 
 	public My(RCEnvironment rcEnvironment) {
-
+		super();
 		this.rcEnvironment = rcEnvironment;
 
 		BY_DELETE_PHONE = By.xpath(".//a[@ng-click-outside='cancelDeletePhone(phone)']");
@@ -99,7 +99,7 @@ public class My extends TestPage {
 
 	@Step("установка business-тарифа")
 	public void setBusinessTariff() {
-		this.wait(BY_BUSINESS_TARIFF, 5, "не найден элемент BY_BUSINESS_TARIFF");
+		this.wait(BY_BUSINESS_TARIFF, 10, "не найден элемент BY_BUSINESS_TARIFF");
 		driver.findElement(BY_BUSINESS_TARIFF).click();
 	}
 

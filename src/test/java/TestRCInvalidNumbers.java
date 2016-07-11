@@ -37,15 +37,16 @@ public class TestRCInvalidNumbers {
 		cabinet.setBusinessTariff();
 		cabinet.deleteOperators();
 		cabinet.setOperator(new RCOperator("9094065104"));
+		//cabinet.setOperator(new RCOperator("9094065104", "11:11", "12:12"));
 		cabinet.close();
 
-		RCWidgetPage rcWidgetPage = new RCWidgetPage(BrowsersEnum.PHANTOMJS);
-		rcWidgetPage.openSite("http://vernee.ru/qa");
-		rcWidgetPage.clickWidgetButton();
-		rcWidgetPage.inputNumber("79607088020");
-		rcWidgetPage.clickThePhoneButton();
-		rcWidgetPage.waitPhoneDialElements();
-		rcWidgetPage.close();
+//		RCWidgetPage rcWidgetPage = new RCWidgetPage(BrowsersEnum.MOZILLA_FIREFOX);
+//		rcWidgetPage.openSite("http://vernee.ru/qa");
+//		rcWidgetPage.clickWidgetButton();
+//		rcWidgetPage.inputNumber("79607088020");
+//		rcWidgetPage.clickThePhoneButton();
+//		rcWidgetPage.waitPhoneDialElements();
+//		rcWidgetPage.close();
 	}
 
 }
