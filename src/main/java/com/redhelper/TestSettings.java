@@ -19,8 +19,8 @@ public class TestSettings {
 														"11111111111");
 
 	//sites with widget
-	public static String urlTestSite = "http://www.tsyopa.ru/ark"; // test
-	public static String urlProdSite = "http://www.vernee.ru/t";   // production
+	public static String urlTestSite = "http://www.tsyopa.ru/ark";	// test
+	public static String urlProdSite = "http://www.vernee.ru/t";	// production
 
 	//адреса кабинетов
 	public static String urlTestMy = "http://test.redhelper.ru/my/login"; // test

@@ -39,6 +39,7 @@
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.0.4</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
@@ -111,7 +112,5 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
-
 
 </project>

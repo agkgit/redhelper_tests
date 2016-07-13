@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -40,15 +42,15 @@ public class My extends TestPage {
 	String login, password;
 	String urlMy;
 
-	public My(RCEnvironment rcEnvironment) {
-		super();
+	public My(RCEnvironment rcEnvironment, WebDriver driver) {
+		super(driver);
 		this.rcEnvironment = rcEnvironment;
 
 		BY_DELETE_PHONE = By.xpath(".//a[@ng-click-outside='cancelDeletePhone(phone)']");
 		BY_DO_DELETE_PHONE_YES = By.xpath(".//button[@ng-click='doDeletePhone(phone)']");
 		BY_ADD_NUMBER = By.cssSelector("div.rc-new-item:nth-child(3) > span:nth-child(2)");
 		BY_REDCONNECT_MENU = By.xpath("//*[@id=\"a-redconnect\"]");
-		BY_BUSINESS_TARIFF = By.xpath(".//div[@class='rc-mode-name' and contains(.,'Businesss')]");
+		BY_BUSINESS_TARIFF = By.xpath(".//div[@class='rc-mode-name' and contains(.,'Business')]");
 		BY_FREE_TARIFF = By.xpath(".//div[@class='rc-mode-name' and contains(.,'Business')]");
 
 		if (this.rcEnvironment == RCEnvironment.TEST) {
@@ -75,6 +77,10 @@ public class My extends TestPage {
 
 		}
 	}
+	public My(RCEnvironment rcEnvironment) {
+		this(rcEnvironment, new PhantomJSDriver(new DesiredCapabilities()));
+	}
+
 
 	@Step("открытие личного кабинета")
 	public void openMy() {
@@ -103,19 +109,17 @@ public class My extends TestPage {
 		driver.findElement(BY_BUSINESS_TARIFF).click();
 	}
 
-	@Step("удаление опекраторов")
+	@Step("удаление операторов")
 	public void deleteOperators() {
 
 		// ожидание для тестовой среды
 
-		this.wait(BY_REDCONNECT_MENU);
+		this.wait(BY_REDCONNECT_MENU, "не найден элемент BY_REDCONNECT_MENU");
 		driver.findElement(BY_REDCONNECT_MENU).click();
 
 		for (; ; ) {
 			try {
-				this.wait(BY_DELETE_PHONE);
 				driver.findElement(BY_DELETE_PHONE).click();
-				this.wait(BY_DO_DELETE_PHONE_YES);
 				driver.findElement(BY_DO_DELETE_PHONE_YES).click();
 			} catch (Exception e) {
 				break;
@@ -182,5 +186,11 @@ public class My extends TestPage {
 			i += 3;
 		}
 	}
+
+
+
+
+
+
 
 }
