@@ -1,6 +1,3 @@
-import com.redhelper.RCEnvironment;
-import com.redhelper.RCOperator;
-import com.redhelper.TestSettings;
 import com.sun.deploy.Environment;
 import com.sun.deploy.security.ruleset.DRSHelper;
 import org.openqa.selenium.By;
@@ -13,12 +10,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.io.OutputStream;
+import java.io.FileOutputStream;
+
 import java.lang.String;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static org.testng.Assert.fail;
+
 
 
 public class My extends TestPage {
@@ -41,10 +42,13 @@ public class My extends TestPage {
 	RCEnvironment rcEnvironment;
 	String login, password;
 	String urlMy;
+	FileOutputStream output = null;
 
 	public My(RCEnvironment rcEnvironment, WebDriver driver) {
+		FileOutputStream output;
 		super(driver);
 		this.rcEnvironment = rcEnvironment;
+		this.output = new FileOutputStream("C:/Users/QA/Desktop/projects/redhelper_tests/src/main/javaconfig.properties");
 
 		BY_DELETE_PHONE = By.xpath(".//a[@ng-click-outside='cancelDeletePhone(phone)']");
 		BY_DO_DELETE_PHONE_YES = By.xpath(".//button[@ng-click='doDeletePhone(phone)']");
@@ -186,10 +190,6 @@ public class My extends TestPage {
 			i += 3;
 		}
 	}
-
-
-
-
 
 
 

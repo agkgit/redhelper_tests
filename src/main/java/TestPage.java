@@ -19,6 +19,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class TestPage {
 
 	WebDriver driver;
+	Boolean testEnviroment;
 
 //конструкторы-----------------------------------------------------------------------------------------
 	public TestPage(WebDriver driver){
@@ -33,9 +34,6 @@ public class TestPage {
 	public void manage(int implicitlyWait, int pageLoadTimeout) {
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-	}
-	public void manage() {
-		this.manage(0, 0);
 	}
 	public void deleteAllCookies() {
 		driver.manage().deleteAllCookies();
