@@ -12,31 +12,31 @@ import static org.testng.AssertJUnit.fail;
 
 public class TestRCInvalidNumbers {
 
-	@Test
-	public void setUnvalidNumber() throws InterruptedException {
-		RCWidgetPage rcWidgetPage = new RCWidgetPage();
-		rcWidgetPage.openSite("http://www.vernee.ru/qa");
+//	@Test
+//	public void setUnvalidNumber() throws InterruptedException {
+//		RCWidgetPage rcWidgetPage = new RCWidgetPage();
+//		rcWidgetPage.openSite("http://www.vernee.ru/qa");
+//
+//		for (String number : TestSettings.numbers) {
+//			rcWidgetPage.reload();
+//			rcWidgetPage.clickWidgetButton();
+//			rcWidgetPage.inputNumber(number);
+//			rcWidgetPage.clickThePhoneButton();
+//			rcWidgetPage.waitWarningInvalidNumber();
+//		}
+//		rcWidgetPage.close();
+//	}
 
-		for (String number : TestSettings.numbers) {
-			rcWidgetPage.reload();
-			rcWidgetPage.clickWidgetButton();
-			rcWidgetPage.inputNumber(number);
-			rcWidgetPage.clickThePhoneButton();
-			rcWidgetPage.waitWarningInvalidNumber();
-		}
-		rcWidgetPage.close();
-	}
-
-	@Test
-	public void testik() throws InterruptedException {
-		WebDriver driver = new FirefoxDriver();
-		driver.get("http://www.ya.ru");
-		Thread.sleep(10000);
-		driver.close();
+//	@Test
+//	public void testik() throws InterruptedException {
+//		WebDriver driver = new FirefoxDriver();
+//		driver.get("http://www.ya.ru");
+//		Thread.sleep(10000);
+//		driver.close();
 //		RCWidgetPage rcWidgetPage = new RCWidgetPage();
 //		rcWidgetPage.openSite("http://vernee.ru/qa");
 //		rcWidgetPage.waitWarningInvalidNumber();
-	}
+//	}
 
 	@Test
 	public void mainTest() throws InterruptedException {

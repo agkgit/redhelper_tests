@@ -10,11 +10,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.FileOutputStream;
 
 import java.lang.String;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -42,13 +45,21 @@ public class My extends TestPage {
 	RCEnvironment rcEnvironment;
 	String login, password;
 	String urlMy;
-	FileOutputStream output = null;
+	FileInputStream fis = null;
 
 	public My(RCEnvironment rcEnvironment, WebDriver driver) {
-		FileOutputStream output;
+
 		super(driver);
+
+		Properties property = new Properties();
+		try {
+			fis = new FileInputStream("src/main/resources/config.properties");
+			property.load(fis);
+		} catch (IOException e) {
+			System.err.println("ОШИБКА: Файл свойств отсуствует!");
+		}
+
 		this.rcEnvironment = rcEnvironment;
-		this.output = new FileOutputStream("C:/Users/QA/Desktop/projects/redhelper_tests/src/main/javaconfig.properties");
 
 		BY_DELETE_PHONE = By.xpath(".//a[@ng-click-outside='cancelDeletePhone(phone)']");
 		BY_DO_DELETE_PHONE_YES = By.xpath(".//button[@ng-click='doDeletePhone(phone)']");
@@ -58,26 +69,26 @@ public class My extends TestPage {
 		BY_FREE_TARIFF = By.xpath(".//div[@class='rc-mode-name' and contains(.,'Business')]");
 
 		if (this.rcEnvironment == RCEnvironment.TEST) {
-			this.urlMy = TestSettings.urlTestMy;
-			this.login = TestSettings.rcLoginTest;
-			this.password = TestSettings.rcPassTest;
+			this.urlMy		= property.getProperty("urlMyTest");
+			this.login		= property.getProperty("rcLoginTest");
+			this.password	= property.getProperty("rcPassTest");
 
-			BY_NUMBER_IMPUT =		By.xpath("/html/body/div[3]/div[2]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[1]/div[1]/div[1]/div/input[1]");
-			BY_ADD_WORK_TIME =		By.xpath("/html/body/div[3]/div[2]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[2]/a[1]");
-			BY_START_WORK_TIME =	By.xpath("/html/body/div[3]/div[2]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[1]");
-			BY_STOP_WORK_TIME =		By.xpath("/html/body/div[3]/div[2]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[2]");
-			BY_SAVE_SETTINGS =		By.xpath("/html/body/div[3]/div[2]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[5]/button");
+			BY_NUMBER_IMPUT			= By.xpath( property.getProperty("BY_NUMBER_IMPUT_Test") );
+			BY_ADD_WORK_TIME		= By.xpath( property.getProperty("BY_ADD_WORK_TIME_Test") );
+			BY_START_WORK_TIME		= By.xpath( property.getProperty("BY_START_WORK_TIME_Test") );
+			BY_STOP_WORK_TIME		= By.xpath( property.getProperty("BY_STOP_WORK_TIME_Test") );
+			BY_SAVE_SETTINGS		= By.xpath( property.getProperty("BY_SAVE_SETTINGS_Test") );
 
 		} else {
-			this.urlMy = TestSettings.urlProdMy;
-			this.login = TestSettings.rcLoginProd;
-			this.password = TestSettings.rcPassProd;
+			this.urlMy		= property.getProperty("urlMyProd");
+			this.login		= property.getProperty("rcLoginProd");
+			this.password	= property.getProperty("rcPassProd");
 
-			BY_NUMBER_IMPUT =		By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[1]/div[1]/div[1]/div/input[1]");
-			BY_ADD_WORK_TIME =		By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[2]/a[1]");
-			BY_START_WORK_TIME =	By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[1]");
-			BY_STOP_WORK_TIME =		By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[2]/ul[2]/li[1]/div[2]/div[4]/div[2]/input[2]");
-			BY_SAVE_SETTINGS = 		By.xpath("/html/body/div[3]/div[3]/div[3]/div[2]/div[3]/div[4]/div/div/div[2]/div[5]/button");
+			BY_NUMBER_IMPUT			= By.xpath( property.getProperty("BY_NUMBER_IMPUT_Prod") );
+			BY_ADD_WORK_TIME		= By.xpath( property.getProperty("BY_ADD_WORK_TIME_Prod") );
+			BY_START_WORK_TIME		= By.xpath( property.getProperty("BY_START_WORK_TIME_Prod") );
+			BY_STOP_WORK_TIME		= By.xpath( property.getProperty("BY_STOP_WORK_TIME_Prod") );
+			BY_SAVE_SETTINGS		= By.xpath( property.getProperty("BY_SAVE_SETTINGS_Prod") );
 
 		}
 	}
